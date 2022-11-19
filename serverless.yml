@@ -1,0 +1,26 @@
+service: serverless-whitesoft
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+custom:
+  serverless-offline:
+    httpPort: 3001
+
+functions:
+  graphql:
+    handler: handler.graphqlHandler
+    events:
+      - http:
+          path: "/graphql"
+          method: any
+          cors: true
+
